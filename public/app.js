@@ -4,6 +4,16 @@ const chatWindow = document.querySelector("#chatWindow");
 
 const history = [];
 
+const agentStatus = document.querySelector("#agentStatus");
+fetch("/api/status")
+  .then((response) => response.json())
+  .then(({ configured }) => {
+    agentStatus.textContent = configured ? "OpenAI connected" : "API key missing";
+  })
+  .catch(() => {
+    agentStatus.textContent = "Agent offline";
+  });
+
 function addMessage(role, text) {
   const message = document.createElement("div");
   message.className = `message ${role}`;

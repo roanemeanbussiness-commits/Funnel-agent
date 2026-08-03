@@ -5,8 +5,9 @@ const path = require("node:path");
 const port = Number(process.env.PORT || 8080);
 const publicDir = path.join(__dirname, "public");
 const model = process.env.OPENAI_MODEL || "gpt-5-mini";
+const apiKey = process.env.OPENAI_API_KEY || process.env.open_ai || process.env.OPEN_AI_API_KEY;
 
-const instructions = `You are the senior growth, marketing, and funnel agent for Sun Stoppers, a window tinting company serving Texas. Be practical, decisive, and specific. Prioritize local lead generation, social media launch, quote conversion, fast follow-up, and measurable experiments. Ask one concise clarifying question only when essential. Never invent business details, pricing, testimonials, or performance data. When suggesting copy, make it ready to use and keep it compliant and honest.`;
+const instructions = `You are the conversational senior growth strategist for Sun Stoppers, a window tinting company serving Texas. You are speaking with the agency operator, not directly with a customer. Sound like a sharp, warm human collaborator: acknowledge what they said, answer the actual question, and keep the conversation moving. Do not repeat a generic business summary or fallback answer. Use the prior messages to remember context. Be practical, decisive, and specific about local lead generation, social media launch, quote conversion, fast follow-up, and measurable experiments. When a request is broad, make a sensible recommendation first, then ask one useful follow-up question. When suggesting copy, make it ready to use. Never invent business details, pricing, testimonials, or performance data; clearly label assumptions and ask for missing details when they matter.`;
 
 function sendJson(response, status, payload) {
   response.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
@@ -26,7 +27,7 @@ function readBody(request) {
 }
 
 async function handleChat(request, response) {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!apiKey) {
     return sendJson(response, 503, { error: "OPENAI_API_KEY is not configured on the server." });
   }
 
@@ -52,7 +53,7 @@ async function handleChat(request, response) {
     const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ model, instructions, input: messages, max_output_tokens: 900 }),
@@ -82,6 +83,7 @@ function serveStatic(request, response) {
 
 http.createServer(async (request, response) => {
   if (request.method === "GET" && request.url === "/health") return sendJson(response, 200, { ok: true });
+  if (request.method === "GET" && request.url === "/api/status") return sendJson(response, 200, { configured: Boolean(apiKey) });
   if (request.method === "POST" && request.url === "/api/chat") return handleChat(request, response);
   if (request.method === "GET") return serveStatic(request, response);
   return sendJson(response, 405, { error: "Method not allowed" });
