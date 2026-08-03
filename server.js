@@ -48,6 +48,30 @@ function extractResponseText(data) {
     .join("\n\n");
 }
 
+async function askOpenAI(input, maxOutputTokens = 900) {
+  const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      instructions: `${instructions}\n\nRecently learned transcript context:\n${learnedTranscript.slice(-30_000)}`,
+      input,
+      max_output_tokens: maxOutputTokens,
+    }),
+  });
+  const data = await openaiResponse.json();
+  if (!openaiResponse.ok) {
+    console.error("OpenAI API error", openaiResponse.status, data);
+    throw new Error("The agent could not reach OpenAI right now.");
+  }
+  const message = extractResponseText(data);
+  if (!message) throw new Error("OpenAI returned an empty response. Please try again.");
+  return { message, responseId: data.id };
+}
+
 async function handleChat(request, response) {
   if (!apiKey) {
     return sendJson(response, 503, { error: "OPENAI_API_KEY is not configured on the server." });
@@ -72,29 +96,68 @@ async function handleChat(request, response) {
   }
 
   try {
-    const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ model, instructions: `${instructions}\n\nRecently learned transcript context:\n${learnedTranscript.slice(-30_000)}`, input: messages, max_output_tokens: 900 }),
-    });
-    const data = await openaiResponse.json();
-    if (!openaiResponse.ok) {
-      console.error("OpenAI API error", openaiResponse.status, data);
-      return sendJson(response, 502, { error: "The agent could not reach OpenAI right now." });
-    }
-    const message = extractResponseText(data);
-    if (!message) {
-      console.error("OpenAI returned no text", { responseId: data.id, status: data.status });
-      return sendJson(response, 502, { error: "OpenAI returned an empty response. Please try again." });
-    }
-    return sendJson(response, 200, { message, responseId: data.id });
+    return sendJson(response, 200, await askOpenAI(messages));
   } catch (error) {
     console.error("Chat request failed", error);
     return sendJson(response, 502, { error: "The agent is temporarily unavailable." });
   }
+}
+
+function decodeXml(value) {
+  return value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+}
+
+async function listChannelVideos(channelId) {
+  const feedResponse = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId)}`);
+  if (!feedResponse.ok) throw new Error("YouTube channel feed unavailable.");
+  const xml = await feedResponse.text();
+  return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].map((match) => {
+    const entry = match[1];
+    const videoId = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1];
+    const title = entry.match(/<title>([\s\S]*?)<\/title>/)?.[1] || "Untitled video";
+    return { videoId, title: decodeXml(title) };
+  }).filter((video) => video.videoId);
+}
+
+async function handleChannelTranscript(request, response) {
+  let payload;
+  try { payload = JSON.parse(await readBody(request)); } catch { return sendJson(response, 400, { error: "Invalid JSON request." }); }
+  const channelId = String(payload.channelId || "").trim();
+  const limit = Math.min(Math.max(Number(payload.limit) || 3, 1), 5);
+  if (!/^[A-Za-z0-9_-]{10,40}$/.test(channelId)) {
+    return sendJson(response, 400, { error: "Provide a valid YouTube channel ID." });
+  }
+  try {
+    const videos = (await listChannelVideos(channelId)).slice(0, limit);
+    if (!videos.length) return sendJson(response, 404, { error: "No videos were found for that channel." });
+    const results = [];
+    for (const video of videos) {
+      try {
+        const transcript = await fetchTranscript(video.videoId);
+        learnedTranscript += `\n[YouTube channel ${channelId}, video ${video.videoId}, title ${video.title}, language ${transcript.language}]\n${transcript.text}`;
+        results.push({ ...video, status: "learned", charactersLearned: transcript.text.length });
+      } catch (error) {
+        console.error("Channel transcript failed", video.videoId, error.message);
+        results.push({ ...video, status: "unavailable" });
+      }
+    }
+    return sendJson(response, 200, { channelId, requested: videos.length, learned: results.filter((video) => video.status === "learned").length, videos: results });
+  } catch (error) {
+    console.error("Channel import failed", error.message);
+    return sendJson(response, 502, { error: "Could not load videos from that YouTube channel." });
+  }
+}
+
+async function handleStrategy(request, response) {
+  if (!apiKey) return sendJson(response, 503, { error: "OpenAI is not configured on the server." });
+  let payload;
+  try { payload = JSON.parse(await readBody(request)); } catch { return sendJson(response, 400, { error: "Invalid JSON request." }); }
+  const type = payload.type === "offer" ? "offer" : "funnel";
+  const input = type === "offer"
+    ? "Refresh Gum Cars Window Tinting's commercial offer. Create 3 differentiated offers for Texas small businesses and commercial properties. For each, include target account, problem, promise, deliverables, proof needed, CTA, operational risk, and the fastest seven-day test. Recommend one winner and label any missing business facts."
+    : "Create a fresh funnel map for Gum Cars Window Tinting focused on commercial and small-business accounts. Give 3 new funnel concepts, each with audience, trigger, message, channel, capture mechanism, qualification, proposal step, follow-up, metric, and seven-day experiment. Recommend the strongest next test. Avoid invented pricing or proof.";
+  try { return sendJson(response, 200, { type, ...(await askOpenAI(input, 1400)) }); }
+  catch (error) { return sendJson(response, 502, { error: error.message }); }
 }
 
 function fetchTranscript(videoId) {
@@ -139,6 +202,8 @@ http.createServer(async (request, response) => {
   if (request.method === "GET" && request.url === "/api/status") return sendJson(response, 200, { configured: Boolean(apiKey) });
   if (request.method === "POST" && request.url === "/api/chat") return handleChat(request, response);
   if (request.method === "POST" && request.url === "/api/learn/youtube") return handleTranscript(request, response);
+  if (request.method === "POST" && request.url === "/api/learn/youtube-channel") return handleChannelTranscript(request, response);
+  if (request.method === "POST" && request.url === "/api/strategy") return handleStrategy(request, response);
   if (request.method === "GET") return serveStatic(request, response);
   return sendJson(response, 405, { error: "Method not allowed" });
 }).listen(port, () => console.log(`Funnel Agent listening on ${port}`));

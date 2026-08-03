@@ -5,6 +5,14 @@ const learningForm = document.querySelector("#learningForm");
 const youtubeUrl = document.querySelector("#youtubeUrl");
 const learningStatus = document.querySelector("#learningStatus");
 const learningResult = document.querySelector("#learningResult");
+const channelLearningForm = document.querySelector("#channelLearningForm");
+const youtubeChannelId = document.querySelector("#youtubeChannelId");
+const channelVideoLimit = document.querySelector("#channelVideoLimit");
+const channelLearningResult = document.querySelector("#channelLearningResult");
+const refreshOfferButton = document.querySelector("#refreshOfferButton");
+const refreshFunnelButton = document.querySelector("#refreshFunnelButton");
+const offerResult = document.querySelector("#offerResult");
+const funnelResult = document.querySelector("#funnelResult");
 
 const history = [];
 
@@ -88,4 +96,59 @@ learningForm.addEventListener("submit", async (event) => {
     button.disabled = false;
     button.textContent = "Import transcript";
   }
+});
+
+channelLearningForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = channelLearningForm.querySelector("button");
+  button.disabled = true;
+  button.textContent = "Learning...";
+  channelLearningResult.textContent = "Finding recent videos and transcribing them one at a time.";
+  try {
+    const response = await fetch("/api/learn/youtube-channel", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ channelId: youtubeChannelId.value.trim(), limit: channelVideoLimit.value }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Channel learning failed");
+    const learnedTitles = data.videos.filter((video) => video.status === "learned").map((video) => video.title).join("; ");
+    channelLearningResult.textContent = `Learned ${data.learned} of ${data.requested} videos. ${learnedTitles || "No transcripts were available."}`;
+  } catch (error) {
+    channelLearningResult.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = "Learn channel";
+  }
+});
+
+async function refreshStrategy(type, button, output) {
+  button.disabled = true;
+  button.textContent = type === "offer" ? "Refreshing..." : "Mapping...";
+  output.textContent = "The agent is researching the current context and building a new recommendation.";
+  try {
+    const response = await fetch("/api/strategy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Strategy refresh failed");
+    output.textContent = data.message;
+  } catch (error) {
+    output.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = type === "offer" ? "Refresh offer" : "Refresh funnel map";
+  }
+}
+
+refreshOfferButton.addEventListener("click", () => refreshStrategy("offer", refreshOfferButton, offerResult));
+refreshFunnelButton.addEventListener("click", () => refreshStrategy("funnel", refreshFunnelButton, funnelResult));
+
+document.querySelectorAll(".nav-list a").forEach((link) => {
+  link.addEventListener("click", () => {
+    document.querySelectorAll(".nav-list a").forEach((item) => item.classList.remove("active"));
+    link.classList.add("active");
+  });
 });

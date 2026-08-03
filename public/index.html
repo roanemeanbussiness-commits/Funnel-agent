@@ -27,6 +27,7 @@
           <a href="#social">Social Setup</a>
           <a href="#content">Content Lab</a>
           <a href="#learning">YouTube Learning</a>
+          <a href="#offerLab">Offer Lab</a>
           <a href="#chat">Agent Chat</a>
         </nav>
 
@@ -85,7 +86,7 @@
                 <p class="eyebrow">Funnel map</p>
                 <h2>From local attention to booked tint jobs</h2>
               </div>
-              <button type="button">Export Plan</button>
+              <button type="button" id="refreshFunnelButton">Refresh funnel map</button>
             </div>
             <div class="funnel-board">
               <div>
@@ -109,6 +110,7 @@
                 <p>Post-install review asks, referral incentive, photo permission workflow.</p>
               </div>
             </div>
+            <p class="strategy-result" id="funnelResult" aria-live="polite"></p>
           </article>
 
           <article class="panel" id="social">
@@ -156,6 +158,28 @@
               <button type="submit">Import transcript</button>
             </form>
             <p class="learning-result" id="learningResult" aria-live="polite"></p>
+            <form class="learning-form channel-learning-form" id="channelLearningForm">
+              <label class="sr-only" for="youtubeChannelId">YouTube channel ID</label>
+              <input id="youtubeChannelId" name="youtubeChannelId" type="text" placeholder="YouTube channel ID" required>
+              <select id="channelVideoLimit" name="channelVideoLimit" aria-label="Videos to learn">
+                <option value="3">Learn latest 3 videos</option>
+                <option value="5">Learn latest 5 videos</option>
+              </select>
+              <button type="submit">Learn channel</button>
+            </form>
+            <p class="learning-result" id="channelLearningResult" aria-live="polite"></p>
+          </article>
+
+          <article class="panel strategy-panel" id="offerLab">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Strategy lab</p>
+                <h2>Refresh the commercial offer</h2>
+              </div>
+              <button type="button" id="refreshOfferButton">Refresh offer</button>
+            </div>
+            <p class="panel-copy">Generate new commercial offers using the latest Gum Cars context and learned material.</p>
+            <div class="strategy-result" id="offerResult" aria-live="polite">Your next offer refresh will appear here.</div>
           </article>
         </section>
 
