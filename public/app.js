@@ -44,11 +44,11 @@ chatForm.addEventListener("submit", async (event) => {
       body: JSON.stringify({ messages: history }),
     });
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Request failed");
+    if (!response.ok) throw new Error(data.error || `Agent request failed (${response.status})`);
     history.push({ role: "assistant", content: data.message });
     addMessage("agent", data.message);
   } catch (error) {
-    addMessage("agent", `I could not connect to the live agent: ${error.message}`);
+    addMessage("agent", `The live agent hit an error: ${error.message}`);
   } finally {
     button.disabled = false;
     button.textContent = "Send";

@@ -38,6 +38,16 @@ function readBody(request) {
   });
 }
 
+function extractResponseText(data) {
+  if (typeof data.output_text === "string" && data.output_text.trim()) return data.output_text.trim();
+  return (data.output || [])
+    .flatMap((item) => item.content || [])
+    .filter((item) => item.type === "output_text" && typeof item.text === "string")
+    .map((item) => item.text.trim())
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 async function handleChat(request, response) {
   if (!apiKey) {
     return sendJson(response, 503, { error: "OPENAI_API_KEY is not configured on the server." });
@@ -75,7 +85,12 @@ async function handleChat(request, response) {
       console.error("OpenAI API error", openaiResponse.status, data);
       return sendJson(response, 502, { error: "The agent could not reach OpenAI right now." });
     }
-    return sendJson(response, 200, { message: data.output_text || "I could not generate a response." });
+    const message = extractResponseText(data);
+    if (!message) {
+      console.error("OpenAI returned no text", { responseId: data.id, status: data.status });
+      return sendJson(response, 502, { error: "OpenAI returned an empty response. Please try again." });
+    }
+    return sendJson(response, 200, { message, responseId: data.id });
   } catch (error) {
     console.error("Chat request failed", error);
     return sendJson(response, 502, { error: "The agent is temporarily unavailable." });
