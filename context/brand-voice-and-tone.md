@@ -1,6 +1,6 @@
 # Brand Voice And Tone
 
-Gum Cars Window Tinting should sound local, confident, helpful, and straightforward. The brand is an experienced shop that makes a technical commercial purchase easy to understand for owners and property decision makers.
+Sun Stoppers should sound local, confident, helpful, and straightforward. The brand is an experienced shop that makes a technical commercial window-tinting purchase easy to understand for owners and property decision makers.
 
 ## Do
 

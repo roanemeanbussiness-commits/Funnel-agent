@@ -1,11 +1,11 @@
 # Marketing Operating System
 
-Use this as the agent's default decision framework for Gum Cars Window Tinting. Every recommendation should connect a business problem to an offer, a distribution channel, a conversion event, and a measurement plan.
+Use this as the agent's default decision framework for Sun Stoppers window tinting. Every recommendation should connect a business problem to an offer, a distribution channel, a conversion event, and a measurement plan.
 
 ## The Growth Loop
 
 1. Learn: collect customer language from conversations, reviews, local questions, competitor content, and imported YouTube transcripts.
-2. Position: choose one audience, one painful or valuable outcome, and one believable reason to choose Gum Cars.
+2. Position: choose one audience, one painful or valuable outcome, and one believable reason to choose Sun Stoppers.
 3. Create: produce proof-led content and a single clear offer.
 4. Capture: route attention to a quote, call, message, or booking action.
 5. Convert: respond quickly, qualify lightly, recommend the next step, and reduce uncertainty.

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Funnel Agent | Gum Cars Window Tinting</title>
+    <title>Funnel Agent | Sun Stoppers + General Use</title>
     <meta
       name="description"
-      content="A commercial and small-business marketing command center for Gum Cars Window Tinting."
+      content="A dual-mode marketing command center for Sun Stoppers and general business growth strategy."
     >
     <link rel="stylesheet" href="./styles.css">
   </head>
@@ -17,12 +17,22 @@
           <div class="brand-mark" aria-hidden="true">FA</div>
           <div>
             <p>Funnel Agent</p>
-            <span>Gum Cars TX</span>
+            <span id="modeSubtitle">Sun Stoppers TX</span>
           </div>
+        </div>
+
+        <div class="agent-tabs" role="tablist" aria-label="Agent mode">
+          <button class="active" type="button" role="tab" aria-selected="true" data-agent-mode="sunStoppers">
+            Sun Stoppers
+          </button>
+          <button type="button" role="tab" aria-selected="false" data-agent-mode="general">
+            General Use
+          </button>
         </div>
 
         <nav class="nav-list">
           <a class="active" href="#command">Command</a>
+          <a class="general-nav-link" href="#businessProfile" hidden>Business Setup</a>
           <a href="#pipeline">Pipeline</a>
           <a href="#social">Social Setup</a>
           <a href="#content">Content Lab</a>
@@ -32,50 +42,103 @@
         </nav>
 
         <div class="client-card">
-          <span>Active Client</span>
-          <strong>Gum Cars Window Tinting</strong>
-          <p>Commercial and small-business window tinting growth system for Texas.</p>
+          <span>Active Agent</span>
+          <strong id="clientName">Sun Stoppers</strong>
+          <p id="clientSummary">Commercial and small-business window tinting growth system for Texas.</p>
         </div>
       </aside>
 
       <main>
         <section class="hero" id="command">
           <div>
-            <p class="eyebrow">Marketing beast mode</p>
-            <h1>Growth command center for Gum Cars Texas.</h1>
-            <p class="hero-copy">
+            <p class="eyebrow" id="heroEyebrow">Marketing beast mode</p>
+            <h1 id="heroTitle">Growth command center for Sun Stoppers Texas.</h1>
+            <p class="hero-copy" id="heroCopy">
               Build the social foundation, capture local tinting demand, and turn every inquiry
               into a booked estimate.
             </p>
           </div>
 
           <div class="hero-panel" aria-label="This week summary">
-            <span>This Week</span>
-            <strong>Launch Sprint</strong>
-            <p>Profiles, offer, landing path, first 14 posts, review request flow.</p>
+            <span id="heroPanelLabel">This Week</span>
+            <strong id="heroPanelTitle">Launch Sprint</strong>
+            <p id="heroPanelCopy">Profiles, offer, landing path, first 14 posts, review request flow.</p>
           </div>
+        </section>
+
+        <section class="panel business-profile-panel" id="businessProfile" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Business setup</p>
+              <h2>General agent profile</h2>
+            </div>
+            <span class="profile-status" id="businessProfileStatus">Not saved</span>
+          </div>
+
+          <form class="business-profile-form" id="businessProfileForm">
+            <label>
+              Business name
+              <input id="profileBusinessName" name="businessName" type="text" placeholder="Example: Apex Roofing">
+            </label>
+            <label>
+              Industry
+              <input id="profileIndustry" name="industry" type="text" placeholder="Example: Residential roofing">
+            </label>
+            <label>
+              Location or service area
+              <input id="profileLocation" name="location" type="text" placeholder="Example: San Antonio, TX">
+            </label>
+            <label>
+              Ideal customer
+              <textarea id="profileIdealCustomer" name="idealCustomer" rows="3" placeholder="Who buys, what they care about, and what triggers demand"></textarea>
+            </label>
+            <label>
+              Core offer
+              <textarea id="profileCoreOffer" name="coreOffer" rows="3" placeholder="Main service, promise, package, or call-to-action"></textarea>
+            </label>
+            <label>
+              Brand voice
+              <input id="profileBrandVoice" name="brandVoice" type="text" placeholder="Example: local, expert, straightforward">
+            </label>
+            <label>
+              Main goal
+              <textarea id="profileMainGoal" name="mainGoal" rows="3" placeholder="Example: book 20 qualified estimates per month"></textarea>
+            </label>
+            <label>
+              Notes
+              <textarea id="profileNotes" name="notes" rows="4" placeholder="Pricing rules, proof, constraints, competitors, channels, or anything the agent should remember"></textarea>
+            </label>
+            <label class="consent-row">
+              <input id="profileSharingConsent" name="profileSharingConsent" type="checkbox">
+              Send this saved business profile to the live AI brain when using General Use mode.
+            </label>
+            <div class="profile-actions">
+              <button type="submit">Save business data</button>
+              <button class="secondary-button" type="button" id="clearBusinessProfileButton">Clear</button>
+            </div>
+          </form>
         </section>
 
         <section class="metrics-grid" aria-label="Marketing metrics">
           <article>
-            <span>Lead Goal</span>
-            <strong>40</strong>
-            <p>qualified estimate requests / month</p>
+            <span id="metricOneLabel">Lead Goal</span>
+            <strong id="metricOneValue">40</strong>
+            <p id="metricOneCopy">qualified estimate requests / month</p>
           </article>
           <article>
-            <span>Primary Offer</span>
-            <strong>Free Quote</strong>
-            <p>heat rejection, privacy, UV protection</p>
+            <span id="metricTwoLabel">Primary Offer</span>
+            <strong id="metricTwoValue">Free Quote</strong>
+            <p id="metricTwoCopy">heat rejection, privacy, UV protection</p>
           </article>
           <article>
-            <span>Local Radius</span>
-            <strong>25 mi</strong>
-            <p>Texas shop service area</p>
+            <span id="metricThreeLabel">Local Radius</span>
+            <strong id="metricThreeValue">25 mi</strong>
+            <p id="metricThreeCopy">Texas shop service area</p>
           </article>
           <article>
-            <span>Launch Assets</span>
-            <strong>18%</strong>
-            <p>profiles and creative kit in progress</p>
+            <span id="metricFourLabel">Launch Assets</span>
+            <strong id="metricFourValue">18%</strong>
+            <p id="metricFourCopy">profiles and creative kit in progress</p>
           </article>
         </section>
 
@@ -84,11 +147,11 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Funnel map</p>
-                <h2>From local attention to booked tint jobs</h2>
+                <h2 id="funnelHeading">From local attention to booked tint jobs</h2>
               </div>
               <button type="button" id="refreshFunnelButton">Refresh funnel map</button>
             </div>
-            <div class="funnel-board">
+            <div class="funnel-board" id="funnelBoard">
               <div>
                 <span>Awareness</span>
                 <strong>Short-form proof</strong>
@@ -115,43 +178,25 @@
 
           <article class="panel" id="social">
             <p class="eyebrow">Social setup</p>
-            <h2>Account launch checklist</h2>
-            <ul class="check-list">
-              <li><span></span> Claim Instagram, Facebook, TikTok, YouTube handles</li>
-              <li><span></span> Add shop logo, hours, service radius, quote CTA</li>
-              <li><span></span> Create review link and Google Business profile flow</li>
-              <li><span></span> Load first two weeks of posts</li>
-            </ul>
+            <h2 id="socialHeading">Account launch checklist</h2>
+            <ul class="check-list" id="socialChecklist"></ul>
           </article>
 
           <article class="panel" id="content">
             <p class="eyebrow">Content lab</p>
-            <h2>Next content moves</h2>
-            <div class="content-stack">
-              <div>
-                <strong>Reel</strong>
-                <p>"Texas heat test: cabin temp before and after ceramic tint."</p>
-              </div>
-              <div>
-                <strong>Carousel</strong>
-                <p>"5 reasons drivers choose window tint beyond looks."</p>
-              </div>
-              <div>
-                <strong>Short</strong>
-                <p>"Installer POV: clean edge reveal on a truck side window."</p>
-              </div>
-            </div>
+            <h2 id="contentHeading">Next content moves</h2>
+            <div class="content-stack" id="contentStack"></div>
           </article>
 
           <article class="panel learning-panel" id="learning">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Knowledge lab</p>
-                <h2>Teach the agent from YouTube</h2>
+                <h2 id="learningHeading">Teach the agent from YouTube</h2>
               </div>
               <span class="learning-status" id="learningStatus">Ready</span>
             </div>
-            <p class="panel-copy">Paste a video link and the agent will transcribe it into working marketing context for this session.</p>
+            <p class="panel-copy" id="learningCopy">Paste a video link and the agent will transcribe it into working marketing context for this session.</p>
             <form class="learning-form" id="learningForm">
               <label class="sr-only" for="youtubeUrl">YouTube video link</label>
               <input id="youtubeUrl" name="youtubeUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." required>
@@ -171,11 +216,11 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Strategy lab</p>
-                <h2>Refresh the commercial offer</h2>
+                <h2 id="offerHeading">Refresh the commercial offer</h2>
               </div>
               <button type="button" id="refreshOfferButton">Refresh offer</button>
             </div>
-            <p class="panel-copy">Generate new commercial offers using the latest Gum Cars context and learned material.</p>
+            <p class="panel-copy" id="offerCopy">Generate new commercial offers using the latest Sun Stoppers context and learned material.</p>
             <div class="strategy-result" id="offerResult" aria-live="polite">Your next offer refresh will appear here.</div>
           </article>
         </section>
@@ -185,20 +230,12 @@
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">Live agent workspace</p>
-                <h2>Talk to the funnel agent</h2>
+                <h2 id="chatHeading">Talk to the funnel agent</h2>
               </div>
               <span class="status-dot" id="agentStatus">Checking connection...</span>
             </div>
 
-            <div class="chat-window" id="chatWindow" aria-live="polite">
-              <div class="message agent">
-                <span>Agent</span>
-                <p>
-                  I am loaded with Gum Cars commercial growth context. Ask for content ideas, funnel steps,
-                  launch priorities, ad angles, or lead follow-up scripts.
-                </p>
-              </div>
-            </div>
+            <div class="chat-window" id="chatWindow" aria-live="polite"></div>
 
             <form class="chat-form" id="chatForm">
               <label class="sr-only" for="chatInput">Message the agent</label>
@@ -216,24 +253,7 @@
           <aside class="panel intelligence-panel">
             <p class="eyebrow">Agent memory</p>
             <h2>Operating brief</h2>
-            <dl>
-              <div>
-                <dt>Client</dt>
-                <dd>Gum Cars, Texas commercial window tinting</dd>
-              </div>
-              <div>
-                <dt>Need</dt>
-                <dd>Commercial outreach, local awareness, quote capture</dd>
-              </div>
-              <div>
-                <dt>Voice</dt>
-                <dd>Expert, local, practical, confident</dd>
-              </div>
-              <div>
-                <dt>Primary CTA</dt>
-                <dd>Book a free tint quote</dd>
-              </div>
-            </dl>
+            <dl id="operatingBrief"></dl>
           </aside>
         </section>
       </main>

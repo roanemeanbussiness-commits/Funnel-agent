@@ -1,6 +1,6 @@
 # Ideal Customer Profile
 
-Gum Cars Window Tinting primarily serves Texas commercial and small-business accounts that need cooler, safer, more comfortable, and more private spaces. Priority prospects include office owners, storefronts, restaurants, medical and dental practices, gyms, apartment and property managers, dealerships, and local operators with customer-facing buildings. Vehicle tinting is a secondary segment.
+Sun Stoppers primarily serves Texas commercial and small-business accounts that need cooler, safer, more comfortable, and more private spaces. Priority prospects include office owners, storefronts, restaurants, medical and dental practices, gyms, apartment and property managers, dealerships, and local operators with customer-facing buildings. Vehicle tinting is a secondary segment.
 
 ## Commercial Buying Signals
 

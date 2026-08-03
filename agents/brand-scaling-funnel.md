@@ -1,6 +1,6 @@
 # Brand Scaling Funnel
 
-Use this workflow for Gum Cars Window Tinting, with commercial and small-business accounts as the primary growth lane:
+Use this workflow for Sun Stoppers window tinting, with commercial and small-business accounts as the primary growth lane:
 
 1. Clarify the commercial offer, service area, proof assets, capacity, and ideal account types.
 2. Build awareness with proof-led local content and account-based outreach to owners and property decision makers.

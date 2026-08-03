@@ -1,17 +1,30 @@
 # Funnel Agent
 
-Marketing and funnel dashboard for Gum Cars Window Tinting in Texas.
+Marketing and funnel dashboard for Sun Stoppers window tinting in Texas.
 
 This version ships as a Dockerized dashboard with a server-side OpenAI chat endpoint and a marketing knowledge layer. It includes:
 
-- Gum Cars client command center
+- Sun Stoppers client command center
+- General Use tab for any business
+- Local business-profile setup for the General Use agent
+- Optional General Use profile sharing with the live AI brain
 - Social setup and content planning panels
 - Local funnel pipeline overview
 - Live OpenAI-powered agent workspace
-- Gum Cars business, voice, offer, and funnel context files
+- Sun Stoppers business, voice, offer, and funnel context files
 - Modular CRO, ad creative, and email funnel skills
+- Prompt-library marketing skill adapted from public marketing prompt repositories
 - YouTube transcript learning endpoint backed by `youtube-transcript-api`
 - Elite funnel orchestration with research, offers, copy, social, revops, experiments, and marketing loops
+
+## Agent modes
+
+The dashboard has two agent modes:
+
+- **Sun Stoppers**: uses the built-in Texas commercial window-tinting context.
+- **General Use**: uses the reusable funnel-agent workflow for whatever business profile is entered in the Business Setup tab.
+
+General Use profile fields are saved in the browser. They are only sent to the live OpenAI-backed agent when the profile-sharing checkbox is enabled in the dashboard. Chat messages are still sent when you use the live chat.
 
 ## Docker
 

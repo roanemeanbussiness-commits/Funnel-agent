@@ -2,7 +2,7 @@
   "name": "funnel-agent",
   "version": "1.0.0",
   "private": true,
-  "description": "Gum Cars commercial marketing and funnel agent dashboard",
+  "description": "Dual-mode marketing and funnel agent dashboard",
   "scripts": {
     "start": "node server.js"
   }
