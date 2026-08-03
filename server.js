@@ -123,7 +123,7 @@ async function handleChannelTranscript(request, response) {
   let payload;
   try { payload = JSON.parse(await readBody(request)); } catch { return sendJson(response, 400, { error: "Invalid JSON request." }); }
   const channelId = String(payload.channelId || "").trim();
-  const limit = Math.min(Math.max(Number(payload.limit) || 3, 1), 5);
+  const limit = Math.min(Math.max(Number(payload.limit) || 3, 1), 25);
   if (!/^[A-Za-z0-9_-]{10,40}$/.test(channelId)) {
     return sendJson(response, 400, { error: "Provide a valid YouTube channel ID." });
   }

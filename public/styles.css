@@ -372,7 +372,7 @@ dd {
 }
 
 .channel-learning-form {
-  grid-template-columns: minmax(0, 1fr) 190px auto;
+  grid-template-columns: minmax(0, 1fr) 180px auto;
   margin-top: 12px;
 }
 

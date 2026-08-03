@@ -113,7 +113,7 @@ channelLearningForm.addEventListener("submit", async (event) => {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Channel learning failed");
     const learnedTitles = data.videos.filter((video) => video.status === "learned").map((video) => video.title).join("; ");
-    channelLearningResult.textContent = `Learned ${data.learned} of ${data.requested} videos. ${learnedTitles || "No transcripts were available."}`;
+    channelLearningResult.textContent = `Analyzed the latest ${data.requested} videos and learned from ${data.learned}. ${learnedTitles || "No transcripts were available."}`;
   } catch (error) {
     channelLearningResult.textContent = error.message;
   } finally {
