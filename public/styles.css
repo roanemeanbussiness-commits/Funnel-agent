@@ -346,6 +346,47 @@ dd {
   grid-template-columns: minmax(0, 1fr) 360px;
 }
 
+.learning-panel {
+  grid-column: 1 / -1;
+}
+
+.panel-copy {
+  max-width: 720px;
+  margin: 8px 0 16px;
+}
+
+.learning-status {
+  color: var(--teal);
+  background: rgba(14, 139, 143, 0.11);
+  border-radius: 999px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.learning-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.learning-form input {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.learning-result {
+  min-height: 1.4em;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .status-dot {
   white-space: nowrap;
   color: var(--teal);
@@ -460,7 +501,7 @@ dd {
   }
 
   .nav-list {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .hero,
@@ -493,7 +534,8 @@ dd {
   }
 
   .panel-heading,
-  .chat-form {
+  .chat-form,
+  .learning-form {
     grid-template-columns: 1fr;
     display: grid;
   }

@@ -26,6 +26,7 @@
           <a href="#pipeline">Pipeline</a>
           <a href="#social">Social Setup</a>
           <a href="#content">Content Lab</a>
+          <a href="#learning">YouTube Learning</a>
           <a href="#chat">Agent Chat</a>
         </nav>
 
@@ -138,6 +139,23 @@
                 <p>"Installer POV: clean edge reveal on a truck side window."</p>
               </div>
             </div>
+          </article>
+
+          <article class="panel learning-panel" id="learning">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Knowledge lab</p>
+                <h2>Teach the agent from YouTube</h2>
+              </div>
+              <span class="learning-status" id="learningStatus">Ready</span>
+            </div>
+            <p class="panel-copy">Paste a video link and the agent will transcribe it into working marketing context for this session.</p>
+            <form class="learning-form" id="learningForm">
+              <label class="sr-only" for="youtubeUrl">YouTube video link</label>
+              <input id="youtubeUrl" name="youtubeUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." required>
+              <button type="submit">Import transcript</button>
+            </form>
+            <p class="learning-result" id="learningResult" aria-live="polite"></p>
           </article>
         </section>
 
