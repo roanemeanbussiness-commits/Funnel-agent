@@ -11,6 +11,7 @@ This version ships as a Dockerized dashboard with a server-side OpenAI chat endp
 - Sun Stoppers business, voice, offer, and funnel context files
 - Modular CRO, ad creative, and email funnel skills
 - YouTube transcript learning endpoint backed by `youtube-transcript-api`
+- Elite funnel orchestration with research, offers, copy, social, revops, experiments, and marketing loops
 
 ## Docker
 
