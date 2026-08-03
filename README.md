@@ -1,14 +1,14 @@
 # Funnel Agent
 
-Marketing and funnel dashboard for Sun Stoppers Texas.
+Marketing and funnel dashboard for Gum Cars Window Tinting in Texas.
 
 This version ships as a Dockerized dashboard with a server-side OpenAI chat endpoint and a marketing knowledge layer. It includes:
 
-- Sun Stoppers client command center
+- Gum Cars client command center
 - Social setup and content planning panels
 - Local funnel pipeline overview
 - Live OpenAI-powered agent workspace
-- Sun Stoppers business, voice, offer, and funnel context files
+- Gum Cars business, voice, offer, and funnel context files
 - Modular CRO, ad creative, and email funnel skills
 - YouTube transcript learning endpoint backed by `youtube-transcript-api`
 - Elite funnel orchestration with research, offers, copy, social, revops, experiments, and marketing loops

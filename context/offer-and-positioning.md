@@ -1,7 +1,7 @@
 # Offer And Positioning
 
-The initial offer is a free quote for professional window tinting from Sun Stoppers in Texas. Position the service around a more comfortable, cooler, more private drive with professional installation and clear guidance on film options.
+The primary offer is a free commercial window-tint assessment and quote from Gum Cars Window Tinting in Texas. Position the service around cooler workspaces, improved customer comfort, glare control, privacy, UV protection, and professional installation with minimal disruption.
 
-The first conversion path should be simple: local social content or an ad, one quote CTA, fast response, vehicle and priority questions, recommendation, appointment, reminder, and review request after installation.
+The primary commercial conversion path should be simple: local business or property research, relevant outreach or proof-led content, one commercial assessment CTA, fast response, building and priority questions, site visit or measurements, proposal, scheduling, completion, and review or referral request. Keep a separate vehicle-tint path for consumer leads.
 
 Do not invent exact prices, warranties, service areas, or legal claims. Ask the operator for those details before publishing them.

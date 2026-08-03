@@ -1,14 +1,19 @@
 # Ideal Customer Profile
 
-Sun Stoppers serves Texas vehicle owners who care about heat reduction, comfort, UV protection, privacy, and a clean professional look. The highest-value prospects are local drivers with newer daily vehicles, families spending time in the car, commuters, and owners who recently bought or upgraded a vehicle.
+Gum Cars Window Tinting primarily serves Texas commercial and small-business accounts that need cooler, safer, more comfortable, and more private spaces. Priority prospects include office owners, storefronts, restaurants, medical and dental practices, gyms, apartment and property managers, dealerships, and local operators with customer-facing buildings. Vehicle tinting is a secondary segment.
 
-## Buying Signals
+## Commercial Buying Signals
 
-- The vehicle sits outside in direct Texas sun.
-- The driver complains about heat, glare, fading, or privacy.
-- The prospect has just purchased a vehicle or is preparing for a road trip.
-- The prospect asks about legal tint limits, film quality, warranty, or installation time.
+- Staff or customers complain about heat, glare, fading, or uncomfortable rooms.
+- Large windows create privacy, security, or visibility concerns.
+- Energy costs, tenant comfort, or a renovation project create urgency.
+- A new location, lease, remodel, or property-management transition is underway.
+- The decision maker asks about scope, scheduling, warranty, film options, or installation disruption.
+
+## Commercial Decision Makers
+
+Owners, facility managers, property managers, office managers, general contractors, and operations leaders. They need a credible quote, clear scope, minimal disruption, proof of commercial work, and confidence that the job will be completed on schedule.
 
 ## Messaging Guidance
 
-Lead with a specific outcome such as a cooler, more comfortable drive. Use real installation proof, clear explanations, local language, and a simple free-quote CTA. Avoid unsupported savings claims and fear-based messaging.
+Lead with a specific business outcome such as cooler workspaces, better customer comfort, improved privacy, glare control, or a more professional storefront. Use real installation proof, clear explanations, local language, and a simple commercial quote CTA. Avoid unsupported savings claims and fear-based messaging.
