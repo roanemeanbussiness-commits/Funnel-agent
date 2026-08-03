@@ -34,6 +34,10 @@ For Fly.io, set it as a secret rather than committing it:
 fly secrets set OPENAI_API_KEY=your_key_here
 ```
 
+## Automatic deployment
+
+The GitHub Actions workflow in `.github/workflows/deploy.yml` deploys every push to `main` to Fly.io. Add a repository secret named `FLY_API_TOKEN` before relying on it. Create a scoped deploy token with `fly tokens create deploy -a funnel-agent`, then add the returned value in GitHub under **Settings → Secrets and variables → Actions**.
+
 The existing `open_ai` secret name is also supported. To import a transcript into the running agent, send a POST request with a YouTube URL or video ID:
 
 ```sh
